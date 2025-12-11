@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cycle-2025-01-brand-a",
+    "brand": "Brand A",
+    "month": "2025-01",
+    "status": "done",
+    "driveFolderUrl": "https://drive.google.com/folder-a-jan",
+    "metaPaid": true,
+    "metaOrganic": false
+  },
+  {
+    "id": "cycle-2025-01-brand-b",
+    "brand": "Brand B",
+    "month": "2025-01",
+    "status": "in_progress",
+    "driveFolderUrl": "https://drive.google.com/folder-b-jan",
+    "metaPaid": false,
+    "metaOrganic": true
+  },
+  {
+    "id": "cycle-2025-02-brand-a",
+    "brand": "Brand A",
+    "month": "2025-02",
+    "status": "blocked",
+    "driveFolderUrl": "https://drive.google.com/folder-a-feb",
+    "metaPaid": true,
+    "metaOrganic": true
+  }
+]

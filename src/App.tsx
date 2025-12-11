@@ -5,12 +5,17 @@ import Table from "./components/Table";
 
 const App = () => {
   return (
-    <main>
+    <div>
       <Header />
-      <FilterBar />
-      <Summary />
-      <Table />
-    </main>
+      <main className="flex justify-between mt-8">
+        <aside className="w-1/4 border border-blue-950 h-screen px-2">
+          <FilterBar />
+          <Summary />
+        </aside>
+
+        <Table />
+      </main>
+    </div>
   );
 };
 
