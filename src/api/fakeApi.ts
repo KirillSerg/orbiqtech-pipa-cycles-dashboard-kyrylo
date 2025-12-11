@@ -16,11 +16,11 @@ export const fakeAPI = {
     let cycles = [...cyclesMockData];
 
     if (params?.brand) {
-      cycles = cycles.filter(cycle => cycle.brand.toLowerCase().includes(params.brand?.toLowerCase()));
+      cycles = cycles.filter(cycle => cycle.brand === params.brand);
     }
 
     if (params?.month) {
-      cycles = cycles.filter(cycle => cycle.month.includes(params.month));
+      cycles = cycles.filter(cycle => cycle.month === params.month);
     }
 
     return { data: cycles as T };

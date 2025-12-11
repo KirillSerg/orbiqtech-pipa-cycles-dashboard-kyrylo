@@ -2,17 +2,22 @@ import { createContext, useContext, useState } from "react";
 import type { Cycles } from "../types/cycles";
 
 type CyclesContextType = {
-  cycles: Cycles[] | null;
-  setCycles: React.Dispatch<React.SetStateAction<Cycles[] | null>>;
+  allCycles: Cycles[] | null;
+  setAllCycles: React.Dispatch<React.SetStateAction<Cycles[] | null>>;
+  filteredCycles: Cycles[] | null;
+  setFilteredCycles: React.Dispatch<React.SetStateAction<Cycles[] | null>>;
 };
 
 const CyclesContext = createContext<CyclesContextType | undefined>(undefined);
 
 export const CyclesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cycles, setCycles] = useState<Cycles[] | null>(null);
+  const [allCycles, setAllCycles] = useState<Cycles[] | null>(null);
+  const [filteredCycles, setFilteredCycles] = useState<Cycles[] | null>(null);
 
   return (
-    <CyclesContext.Provider value={{ cycles, setCycles }}>
+    <CyclesContext.Provider
+      value={{ allCycles, setAllCycles, filteredCycles, setFilteredCycles }}
+    >
       {children}
     </CyclesContext.Provider>
   );

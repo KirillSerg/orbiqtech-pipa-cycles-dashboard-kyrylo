@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import cyclesService from "../api/services/cyclesService";
-import type { Cycles } from "../types/cycles";
 import { useCycles } from "../context/CyclesContext";
+import Error from "./Error";
 
 const Table = () => {
-  const { cycles, setCycles } = useCycles();
+  const { setAllCycles, filteredCycles, setFilteredCycles } = useCycles();
   const [fetchError, setFetchError] = useState<unknown>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -13,22 +13,23 @@ const Table = () => {
   const brand = params.get("brand") ?? "";
   const month = params.get("month") ?? "";
 
-  useEffect(() => {
-    const timeoutId = setTimeout(async () => {
-      try {
-        setLoading(true);
-        const data = await cyclesService.getCyclesAll({ brand, month });
-        setCycles(data);
-        setFetchError(null);
-      } catch (err) {
-        setFetchError(err);
-        setLoading(false);
-      } finally {
-        setLoading(false);
-      }
-    }, 700);
+  const handleFetchCycles = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await cyclesService.getCyclesAll({ brand, month });
+      if (!brand && !month) setAllCycles(data);
+      setFilteredCycles(data);
+      setFetchError(null);
+    } catch (err) {
+      setFetchError(err);
+      setFilteredCycles(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [brand, month]);
 
-    return () => clearTimeout(timeoutId);
+  useEffect(() => {
+    handleFetchCycles();
   }, [brand, month]);
 
   return (
@@ -38,11 +39,9 @@ const Table = () => {
       {loading ? (
         <p className="text-green-900 grow px-4">Loading cycles...</p>
       ) : fetchError ? (
-        <p className="text-red-700 grow px-4">
-          Something went wrong while loading cycles.
-        </p>
-      ) : !!cycles?.length ? (
-        cycles.map(cycle => (
+        <Error onFetchCycles={handleFetchCycles} />
+      ) : !!filteredCycles?.length ? (
+        filteredCycles.map(cycle => (
           <p key={cycle.id}>{cycle.brand + " " + cycle.month}</p>
         ))
       ) : (

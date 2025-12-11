@@ -2,22 +2,36 @@ import { CyclesStatus } from "../assets/data/constants";
 import { useCycles } from "../context/CyclesContext";
 
 const Summary = () => {
-  const { cycles } = useCycles();
-
-  if (!cycles) return <p>No data yet</p>;
+  const { filteredCycles } = useCycles();
 
   return (
     <section>
       <h2 className="mb-4 font-bold">Summary</h2>
-      <p className="font-bold">Total cycles: {cycles.length}</p>
-      <p>Done: {cycles.filter(c => c.status === CyclesStatus.Done).length}</p>
-      <p>
-        In progress:{" "}
-        {cycles.filter(c => c.status === CyclesStatus.in_progress).length}
-      </p>
-      <p>
-        Blocked: {cycles.filter(c => c.status === CyclesStatus.blocked).length}
-      </p>
+      {filteredCycles ? (
+        <>
+          <p className="font-bold">Total cycles: {filteredCycles.length}</p>
+          <p>
+            Done:{" "}
+            {filteredCycles.filter(c => c.status === CyclesStatus.Done).length}
+          </p>
+          <p>
+            In progress:{" "}
+            {
+              filteredCycles.filter(c => c.status === CyclesStatus.in_progress)
+                .length
+            }
+          </p>
+          <p>
+            Blocked:{" "}
+            {
+              filteredCycles.filter(c => c.status === CyclesStatus.blocked)
+                .length
+            }
+          </p>
+        </>
+      ) : (
+        <p>No data</p>
+      )}
     </section>
   );
 };
