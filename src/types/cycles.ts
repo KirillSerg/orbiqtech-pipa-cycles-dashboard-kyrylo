@@ -1,8 +1,10 @@
+import type { CyclesStatus } from "../assets/data/constants";
+
 export type Cycles = {
   id: string;
   brand: string;
   month: string;
-  status: "done" | "in_progress" | "blocked";
+  status: CyclesStatus;
   driveFolderUrl: string;
   metaPaid: boolean;
   metaOrganic: boolean;

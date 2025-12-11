@@ -12,15 +12,15 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="w-full">
-      <h2>FilterBar</h2>
+    <div className="w-full pt-4">
+      <h2 className="font-bold mb-4">FilterBar</h2>
       <label htmlFor="brand">brand</label>
       <input
         value={brand}
         type="text"
         id="brand"
         onChange={event => handlerOnChange(event)}
-        className="border border-amber-500 px-2 rounded-lg w-full"
+        className="border focus-visible:outline-amber-500 px-2 rounded-lg w-full"
       />
       <label htmlFor="month">month</label>
       <input
@@ -28,7 +28,7 @@ const FilterBar = () => {
         type="text"
         id="month"
         onChange={event => handlerOnChange(event)}
-        className="border border-amber-500 px-2 rounded-lg w-full"
+        className="border focus-visible:outline-amber-500 px-2 rounded-lg w-full"
       />
     </div>
   );
