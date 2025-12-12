@@ -21,7 +21,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="w-full pt-4 flex flex-col">
+    <div className="md:w-full pt-4 flex-1 flex flex-col">
       <h2 className="font-bold mb-4">FilterBar</h2>
       <label htmlFor="brand">Brand: </label>
       <select

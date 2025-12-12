@@ -5,7 +5,7 @@ const Summary = () => {
   const { filteredCycles } = useCycles();
 
   return (
-    <section>
+    <section className="flex-1">
       <h2 className="mb-4 font-bold">Summary</h2>
       {filteredCycles ? (
         <>
